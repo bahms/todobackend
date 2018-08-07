@@ -6,6 +6,7 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - "/tmp/cache-pip:/cache"
+      - "/build_host:/build66666"
     links:
       - db
     environment:
@@ -15,6 +16,17 @@ services:
       MYSQL_USER: root 
       MYSQL_PASSWORD: password
       TEST_OUTPUT_DIR: /reports
+
+  builder:
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - "/tmp/cache-pip:/cache"
+      - "../../target:/wheelhouse"
+      - "/build_host:/build123"
+    entrypoint: "entrypoint.sh"
+    command: ["pip", "wheel", "--no-index", "-f /build123", "."]
   
   agent:
     image: bahms/ansible

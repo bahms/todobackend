@@ -13,6 +13,8 @@ VOLUME /wheelhouse
 
 VOLUME /reports
 
+VOLUME /build66666
+
 COPY scripts/test.sh /usr/local/bin/test.sh
 RUN chmod +x /usr/local/bin/test.sh
 

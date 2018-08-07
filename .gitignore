@@ -1,3 +1,4 @@
+target
 venv
 *.pyc
 *.sqlite3
