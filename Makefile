@@ -41,7 +41,8 @@ clean:
 	@docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
 	${INFO} "Cleaning ok"
 
-YELLOW := "\e[1;33m"
+#text in bold ([1) AND YELLOW (33m)
+YELLOW := "\e[1;33m" 
 NO_COLOR := "\e[0m"
 
 INFO := @bash -c 'printf $(YELLOW); echo "=> $$1"; printf $(NO_COLOR)' VALUE
