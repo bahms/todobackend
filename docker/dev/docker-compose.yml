@@ -6,6 +6,7 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - cache:/cache
+      - build:/build
     links:
       - db
     environment:
@@ -22,8 +23,9 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - cache:/cache
+      - build:/build
     entrypoint: "entrypoint.sh"
-    command: ["pip", "wheel", "--no-index", "-f /build123", "."]
+    command: ["pip", "wheel", "--no-index", "-f /build", "."]
   
   agent:
     image: bahms/ansible
@@ -44,3 +46,4 @@ services:
 
 volumes:
   cache:
+  build:
