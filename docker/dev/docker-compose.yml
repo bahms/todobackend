@@ -5,8 +5,7 @@ services:
       context: ../../  
       dockerfile: docker/dev/Dockerfile
     volumes:
-      - "/tmp/cache-pip:/cache"
-      - "/build_host:/build66666"
+      - cache:/cache
     links:
       - db
     environment:
@@ -22,8 +21,7 @@ services:
       context: ../../
       dockerfile: docker/dev/Dockerfile
     volumes:
-      - "/tmp/cache-pip:/cache"
-      - "/build_host:/build123"
+      - cache:/cache
     entrypoint: "entrypoint.sh"
     command: ["pip", "wheel", "--no-index", "-f /build123", "."]
   
@@ -43,3 +41,6 @@ services:
       - "3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  cache:
