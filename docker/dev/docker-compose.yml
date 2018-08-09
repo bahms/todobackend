@@ -22,7 +22,6 @@ services:
       context: ../../
       dockerfile: docker/dev/Dockerfile
     volumes:
-      - cache:/cache
       - build:/build
     entrypoint: "entrypoint.sh"
     command: ["pip", "wheel", "--no-index", "-f /build", "."]
@@ -45,5 +44,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
 
 volumes:
-  cache:
   build:
+    driver: local
+  cache:
+    external: true
