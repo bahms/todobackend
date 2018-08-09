@@ -23,10 +23,11 @@ services:
       - "--die-on-term"
   
   nginx:
-    image: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     volumes:
       - webroot:/var/www/todobackend
-      - ./todobackend.conf:/etc/nginx/conf.d/todobackend.conf
     links:
       - app
     ports:
@@ -44,13 +45,12 @@ services:
 
   agent:
     image: bahms/ansible
-    volumes:
-      - ../../ansible/probe.yml:/ansible/site.yml
     links:
       - db
     environment:
       PROBE_HOST: "db"
       PROBE_PORT: "3306"
+    command: ["probe.yml"]
 
   test:
     image: bahms/todobackend-specs

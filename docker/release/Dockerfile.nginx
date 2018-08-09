@@ -1,0 +1,4 @@
+FROM nginx
+MAINTAINER Mamadou Saliou BAH
+
+COPY todobackend.conf /etc/nginx/conf.d/todobackend.conf

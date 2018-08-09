@@ -23,20 +23,18 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - "/tmp/cache-pip:/cache"
-      - "../../target:/wheelhouse"
       - "/build_host:/build123"
     entrypoint: "entrypoint.sh"
     command: ["pip", "wheel", "--no-index", "-f /build123", "."]
   
   agent:
     image: bahms/ansible
-    volumes:
-      - "../../ansible/probe.yml:/ansible/site.yml"
     links:
       - db
     environment:
       PROBE_HOST: "db"
       PROBE_PORT: "3306"
+    command: ["probe.yml"]
 
   db:
     image: mysql:5.6
