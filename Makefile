@@ -21,7 +21,7 @@ test:
 	@docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) run --rm agent
 	${INFO} "Running tests"
 	@docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up test
-	docker cp $$(docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) ps -q test):/reports/. report
+	docker cp $$(docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) ps -q test):/reports/. reports
 	${CHECK} $(DEV_PROJECT) $(DEV_COMPOSE_FILE) test
 	${INFO} "Testing complete"
 

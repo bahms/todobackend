@@ -2,5 +2,6 @@ target
 venv
 *.pyc
 *.sqlite3
+target
 targets
 reports
