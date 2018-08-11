@@ -60,6 +60,9 @@ release:
 	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) run --rm app manage.py collectstatic --noinput
 	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) run --rm app manage.py migrate --noinput
 	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up test
+	${INFO} "********SLEEP*********"
+	sleep $$SLEEP_RETRY 
+	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up test
 	docker cp $$(docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) ps -q test):/reports/. reports
 	${CHECK} $(REL_PROJECT) $(REL_COMPOSE_FILE) test
 	${INFO} "Release phase (Acceptance tests complete)"
